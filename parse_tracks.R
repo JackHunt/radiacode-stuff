@@ -1,5 +1,5 @@
-library(optparse)
 library(jsonlite)
+library(optparse)
 
 # rctrk files are basically just JSON files of the form (for example):
 # {
