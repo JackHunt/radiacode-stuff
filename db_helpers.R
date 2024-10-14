@@ -2,14 +2,14 @@ library(DBI)
 library(RPostgres)
 
 get_connection <- function() {
-  con <- dbConnect(RPostgres::Postgres(),
+  dbConnect(RPostgres::Postgres(),
     dbname = "radiacode",
     host = "localhost"
   )
+}
 
-  fns <- readLines("sql/functions.sql")
-  q <- paste(fns, collapse = "\n")
+load_sql_function <- function(func_name, con) {
+  fn <- readLines(paste0("sql/", func_name, ".sql"))
+  q <- paste(fn, collapse = "\n")
   dbExecute(con, q)
-
-  return(con)
 }
