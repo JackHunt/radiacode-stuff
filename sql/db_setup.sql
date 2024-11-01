@@ -22,8 +22,7 @@ CREATE TABLE markers (
 CREATE TABLE sessions (
     id serial PRIMARY KEY,
     start_time bigint NOT NULL,
-    title varchar(255) NOT NULL,
-    sv boolean NOT NULL
+    title varchar(255) NOT NULL
 );
 
 CREATE TABLE device_session_relation (
