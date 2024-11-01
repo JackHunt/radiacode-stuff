@@ -24,7 +24,7 @@ library(optparse)
 #    ],
 #    "start" : 1723382107,
 #    "title" : "Track 11.08.2024 14:15:07",
-#    "sv" : false
+#    "sv" : false # Currently ignored.
 # }
 
 parse_rctrk <- function(fname) {
@@ -33,7 +33,7 @@ parse_rctrk <- function(fname) {
   }
 
   raw <- fromJSON(fname)
-  session_data <- raw[c("devices", "periods", "start", "title", "sv")]
+  session_data <- raw[c("devices", "periods", "start", "title")]
   markers <- as.data.frame(raw$markers)
   markers <- markers[, c("date", "lat", "lon", "countRate", "doseRate")]
 
