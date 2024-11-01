@@ -14,23 +14,30 @@ add_devices <- function(devices, con) {
 add_session <- function(session_data, devices, con) {
   load_sql_function("add_session", con)
 
+  devices_sql <- paste0("ARRAY[", paste(lapply(devices, function(d) {
+    d$add_device
+  }), collapse = ","), "]")
+
   dbGetQuery(con, sprintf(
-    "SELECT add_session('%s', %s, %s, %s);",
+    "SELECT add_session('%s', %d, %s);",
     session_data$title,
     session_data$start,
-    session_data$sv,
-    session_data$devices
+    devices_sql
   ))
+}
+
+add_markers <- function(session_key, markers, con) {
+  lapply(markers, function(marker) {
+    #
+  })
 }
 
 process_tracks <- function(tracks, con) {
   lapply(tracks, function(track) {
     session_data <- track$session_data
-    markers <- track$markers
-
     device_keys <- add_devices(session_data$devices, con)
     session_key <- add_session(session_data, device_keys, con)
-    print((device_keys[[1]]$add_device))
+    add_markers(session_key, track$markers, con)
   })
 }
 
