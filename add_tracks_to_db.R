@@ -51,7 +51,7 @@ if (!interactive()) {
 
   opt <- parse_args(opt_parser)
 
-  if (is.null(opt$dir)) {
+  if (is.null(opt$in_rds)) {
     stop("Path to the *.rds file must be specified.")
   }
 
