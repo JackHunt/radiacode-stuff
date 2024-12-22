@@ -4,6 +4,10 @@ RETURNS integer AS $$
       marker_key integer;
     BEGIN
     SELECT id INTO marker_key FROM sessions WHERE marker_time = p_time;
+    IF marker_key is NULL THEN
+      INSERT INTO markers () VALUES ()
+      RETURNING id INTO marker_key
+    END IF;
 END;
 $$ LANGUAGE plpgsql
 ;
