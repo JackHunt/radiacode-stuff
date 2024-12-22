@@ -27,8 +27,17 @@ add_session <- function(session_data, devices, con) {
 }
 
 add_markers <- function(session_key, markers, con) {
+  load_sql_function("add_marker", con)
+
   lapply(markers, function(marker) {
-    #
+    dbGetQuery(con, sprintf(
+      "SELECT add_marker(%f, %f, $d, $f, $f);",
+      marker$lat,
+      marker$lon,
+      marker$date,
+      marker$countRate,
+      marker$doseRate
+    ))
   })
 }
 
